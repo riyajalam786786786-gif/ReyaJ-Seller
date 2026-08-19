@@ -5,66 +5,282 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ANUJ x PANEL</title>
     <style>
-        :root { --bg: #070d14; --card: #0f1923; --text: #fff; --accent: #00e5ff; --wa: #25d366; }
-        body { background: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; padding-bottom: 80px; }
-        .header { padding: 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1a2936; }
-        .avatar { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--accent); }
+        :root { --bg: #070d14; --card: #0d1722; --border: #1a2a3a; --text: #fff; --subtext: #8899a6; --accent: #00e5ff; --wa: #25d366; --tag-bg: #102535; --tag-color: #55b6e6; }
+        body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding-bottom: 90px; }
+        
+        .header { padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); background: #08121c; position: sticky; top: 0; z-index: 100; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent); }
+        .wallet-badge { background: #11222d; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; color: var(--accent); border: 1px solid #1a3344; }
+        
         .content { padding: 15px; display: none; }
         .active { display: block; }
-        .card { background: var(--card); padding: 15px; border-radius: 12px; margin-bottom: 15px; border: 1px solid #1a2936; }
-        .btn { background: var(--accent); color: #000; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; cursor: pointer; display: block; margin-top: 10px; text-decoration: none; }
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: #081018; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #1a2936; }
-        .nav-item { cursor: pointer; color: #7a8b9e; font-size: 11px; text-align: center; }
+        
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        
+        .stock-badge { position: absolute; top: 18px; right: 18px; background: rgba(0,0,0,0.7); color: #fff; font-size: 9px; padding: 3px 8px; border-radius: 10px; font-weight: bold; z-index: 2; border: 1px solid #334455; }
+        
+        .tag { display: inline-block; background: var(--tag-bg); color: var(--tag-color); font-size: 9px; padding: 3px 6px; border-radius: 4px; font-weight: bold; margin-bottom: 6px; width: fit-content; text-transform: uppercase; }
+        .card-title { font-size: 12px; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; line-height: 1.2; }
+        .card-sub { font-size: 10px; color: var(--subtext); margin-bottom: 8px; }
+        .card-stats { display: flex; gap: 8px; font-size: 10px; color: var(--subtext); margin-bottom: 8px; }
+        .price-text { font-size: 11px; font-weight: bold; color: var(--accent); margin-bottom: 8px; }
+        
+        .btn-buy { background: var(--accent); color: #000; padding: 8px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 11px; cursor: pointer; text-decoration: none; border: none; width: 100%; box-sizing: border-box; display: block; }
+        .btn-buy:hover { opacity: 0.9; }
+
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: #081018; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border); z-index: 10; }
+        .nav-item { cursor: pointer; color: var(--subtext); font-size: 10px; text-align: center; }
         .nav-item.active { color: var(--accent); }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .qr-box { width: 100%; max-width: 200px; margin: 10px auto; display: block; border-radius: 10px; border: 2px solid var(--accent); }
+        .qr-box { width: 100%; max-width: 220px; margin: 10px auto; display: block; border-radius: 10px; border: 2px solid var(--accent); }
     </style>
 </head>
 <body>
 
+    <!-- HEADER -->
     <div class="header">
         <div style="display:flex; align-items:center; gap:10px;">
             <img src="https://i.ibb.co/nMZY2bQJ/watermarked-img-12130583545689383100.png" class="avatar">
-            <div><h4 style="margin:0">ANUJ x PANEL</h4><small style="color:var(--accent)">SECURE LICENSE VAULT</small></div>
+            <div>
+                <h4 style="margin:0; font-size:14px;">ANUJ x PANEL</h4>
+                <small style="color:var(--accent); font-size:10px;">SECURE LICENSE VAULT</small>
+            </div>
         </div>
-        <div style="background:#11222d; padding:5px 12px; border-radius:20px; font-size:12px; color:var(--accent)">👛 NPR 40</div>
+        <div class="wallet-badge">👛 NPR 0</div>
     </div>
 
     <!-- STORE -->
     <div id="store" class="content active">
         <div class="grid">
-            <div class="card"><strong>BALA MOD PRO</strong><br><small>NPR 50</small><div class="btn" onclick="alert('Contact Support')">BUY</div></div>
-            <div class="card"><strong>DRIP CLIENT</strong><br><small>NPR 150</small><div class="btn" onclick="alert('Contact Support')">BUY</div></div>
+
+            <div class="card">
+                <div class="stock-badge">11988 STOCK</div>
+                <div class="tag">ANDROID</div>
+                <div class="card-title">BALA MOD PRO</div>
+                <div class="card-sub">99.99% SAFE</div>
+                <div class="card-stats"><span>📈 143 SOLD</span><span>⭐ 5.0</span></div>
+                <div class="price-text">Starts at: NPR 50</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20BALA%20MOD%20PRO" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">1804 STOCK</div>
+                <div class="tag">APKMOD</div>
+                <div class="card-title">DRIP CLIENT APKMOD</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 60 SOLD</span><span>⭐ 5.0</span></div>
+                <div class="price-text">Starts at: NPR 150</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20DRIP%20CLIENT%20APKMOD" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">15 STOCK</div>
+                <div class="tag">FF PROXY</div>
+                <div class="card-title">DRIP CLIENT-PROXY APKMOD</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 22 SOLD</span><span>⭐ 5.0</span></div>
+                <div class="price-text">Starts at: NPR 140</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20DRIP%20CLIENT-PROXY%20APKMOD" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">203 STOCK</div>
+                <div class="tag">ANDROID</div>
+                <div class="card-title">SILENT CHEATS APKMOD</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 19 SOLD</span><span>⭐ 5.0</span></div>
+                <div class="price-text">Starts at: NPR 150</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20SILENT%20CHEATS%20APKMOD" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">93 STOCK</div>
+                <div class="tag">ANDROID</div>
+                <div class="card-title">PATO TEAM ORANGE APKMOD</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 6 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 450</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20PATO%20TEAM%20ORANGE%20APKMOD" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">366 STOCK</div>
+                <div class="tag">ANDROID</div>
+                <div class="card-title">HG CHEATS APKMOD</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 5 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 160</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20HG%20CHEATS%20APKMOD" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">5 STOCK</div>
+                <div class="tag">ANDROID</div>
+                <div class="card-title">TM PANEL VIP APKMOD</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 3 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 400</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20TM%20PANEL%20VIP%20APKMOD" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">2 STOCK</div>
+                <div class="tag">IOS</div>
+                <div class="card-title">MIGUL IOS PRO VERSION</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 1 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 550</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20MIGUL%20IOS%20PRO%20VERSION" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">2 STOCK</div>
+                <div class="tag">IOS</div>
+                <div class="card-title">G-BOX & E-SIGN CERTIFICATE</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 0 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 1,050</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20G-BOX%20%26%20E-SIGN%20CERTIFICATE" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">72 STOCK</div>
+                <div class="tag">IOS</div>
+                <div class="card-title">FLUORITE iOS</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 0 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 780</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20FLUORITE%20iOS" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">253 STOCK</div>
+                <div class="tag">ROOT DEVICE</div>
+                <div class="card-title">SILENT CHEATS BRUTAL APKROOT</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 0 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 160</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20SILENT%20CHEATS%20BRUTAL%20APKROOT" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">57 STOCK</div>
+                <div class="tag">ROOT DEVICE</div>
+                <div class="card-title">SILENT CHEATS SAFE APKROOT</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 0 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 160</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20SILENT%20CHEATS%20SAFE%20APKROOT" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">34 STOCK</div>
+                <div class="tag">ROOT DEVICE</div>
+                <div class="card-title">SCORPION MOD BRUTAL APKROOT</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 0 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 500</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20SCORPION%20MOD%20BRUTAL%20APKROOT" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">58 STOCK</div>
+                <div class="tag">ROOT DEVICE</div>
+                <div class="card-title">REAPER X PRO APKROOT</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 0 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 590</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20REAPER%20X%20PRO%20APKROOT" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">253 STOCK</div>
+                <div class="tag">ANDROID</div>
+                <div class="card-title">PRIME HOOK APKMOD</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 0 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 150</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20PRIME%20HOOK%20APKMOD" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">35 STOCK</div>
+                <div class="tag">ROOT DEVICE</div>
+                <div class="card-title">SCORPION MOD LITE APKROOT</div>
+                <div class="card-sub">Starting From</div>
+                <div class="card-stats"><span>📈 0 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 500</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20SCORPION%20MOD%20LITE%20APKROOT" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">999 STOCK</div>
+                <div class="tag">ROOT+NONROOT</div>
+                <div class="card-title">HAXX-CHAKER NONROOT+ROOT</div>
+                <div class="card-sub">ROOT+NONROOT</div>
+                <div class="card-stats"><span>📈 0 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 900</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20HAXX-CHAKER%20NONROOT%2BROOT" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">1289 STOCK</div>
+                <div class="tag">ROOT+VPHONEOS</div>
+                <div class="card-title">BR MOD</div>
+                <div class="card-sub">Root Best Panel</div>
+                <div class="card-stats"><span>📈 0 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 120</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20BR%20MOD" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
+            <div class="card">
+                <div class="stock-badge">15 STOCK</div>
+                <div class="tag">ROOT DEVICE</div>
+                <div class="card-title">LK TEAM ROOT</div>
+                <div class="card-sub">Root Device</div>
+                <div class="card-stats"><span>📈 0 SOLD</span><span>⭐ NEW</span></div>
+                <div class="price-text">Starts at: NPR 250</div>
+                <a href="https://wa.me/9779822259366?text=Hello%20I%20want%20to%20buy%20LK%20TEAM%20ROOT" class="btn-buy" target="_blank">🛒 BUY NOW</a>
+            </div>
+
         </div>
     </div>
 
     <!-- WALLET -->
     <div id="wallet" class="content">
         <h3>RECHARGE WALLET</h3>
-        <div class="card">
-            <p>Scan eSewa QR:</p>
-            <!-- eSewa Image -->
-            <img src="https://i.ibb.co/cczy1NFK/eSewa.jpg" alt="eSewa QR" class="qr-box">
-            <a href="https://wa.me/9779822259366?text=Maine%20eSewa%20se%20Payment%20kar%20diya%20hai" class="btn">Send Screenshot to WhatsApp</a>
+        <div class="card" style="text-align: center;">
+            <p style="font-size:12px;">Scan eSewa QR Code:</p>
+            <img src="https://i.ibb.co/skn612T/eSewa.jpg" alt="eSewa QR" class="qr-box">
+            <a href="https://wa.me/9779822259366?text=Maine%20eSewa%20se%20Payment%20kar%20diya%20hai" class="btn-buy" style="background:var(--wa); color:#fff; display:block; text-decoration:none; margin-top:10px;" target="_blank">Send Screenshot to WhatsApp</a>
         </div>
     </div>
 
     <!-- KEYS -->
-    <div id="keys" class="content"><h3>YOUR KEYS</h3><div class="card">No active keys.</div></div>
+    <div id="keys" class="content">
+        <h3>YOUR KEYS</h3>
+        <div class="card"><p style="font-size:12px; color:var(--subtext);">No active keys found.</p></div>
+    </div>
 
     <!-- REFERRAL -->
-    <div id="referral" class="content"><h3>INVITE</h3><div class="card">Copy link: <input type="text" value="anujxpanel.store/ref" readonly style="width:100%; background:transparent; color:#fff; border:none; margin-top:5px;"></div></div>
+    <div id="referral" class="content">
+        <h3>INVITE</h3>
+        <div class="card">
+            <p style="font-size:12px;">Copy your referral link:</p>
+            <input type="text" value="anujxpanel.store/ref" readonly style="width:100%; background:transparent; color:#fff; border:1px solid var(--border); padding:8px; border-radius:6px; box-sizing:border-box;">
+        </div>
+    </div>
 
     <!-- PROFILE -->
     <div id="profile" class="content">
         <h3>PROFILE</h3>
         <div class="card">
-            <p>Joined: 11 Aug 2026</p>
-            <!-- WhatsApp Channel Link -->
-            <a href="https://whatsapp.com/channel/0029VbBY5372P59nZf4Eg51Y" class="btn" style="background:var(--wa); color:#fff" target="_blank">Join WhatsApp Channel</a>
+            <p style="font-size:12px;">Joined: 11 Aug 2026</p>
+            <a href="https://whatsapp.com/channel/0029VbBY5372P59nZf4Eg51Y" class="btn-buy" style="background:var(--wa); color:#fff; display:block; text-decoration:none;" target="_blank">Join WhatsApp Channel</a>
         </div>
     </div>
 
+    <!-- BOTTOM NAV -->
     <div class="nav-bar">
         <div class="nav-item active" onclick="show('store', this)">🏠<br>STORE</div>
         <div class="nav-item" onclick="show('wallet', this)">👛<br>WALLET</div>
@@ -82,4 +298,5 @@
         }
     </script>
 </body>
-</html>
+    </html>
+                                                                 
