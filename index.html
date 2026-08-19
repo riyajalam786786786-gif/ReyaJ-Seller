@@ -1,25 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>ReyaJ Seller ☠️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anuj x Panel Store</title>
     <style>
-        body { background-color: #121212; color: white; font-family: Arial; text-align: center; padding: 20px; }
-        .profile-img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #ff0055; margin-bottom: 10px; object-fit: cover; }
-        h1 { color: #ff0055; margin: 5px 0; }
-        .card { border: 1px solid #333; padding: 15px; margin: 15px auto; max-width: 300px; border-radius: 8px; background: #1e1e1e; }
-        .btn { background: #ff0055; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 10px; font-weight: bold; }
+        :root { --bg: #0b131e; --card: #16202d; --text: #ffffff; --accent: #00d4ff; }
+        body { background-color: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; padding-bottom: 70px; }
+        .header { padding: 20px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #222; }
+        .avatar { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--accent); }
+        .content { padding: 15px; display: none; }
+        .active { display: block; }
+        .card { background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #2a3a4a; }
+        .btn { background: var(--accent); color: #000; padding: 12px; border-radius: 10px; text-align: center; font-weight: bold; cursor: pointer; display: block; margin-top: 10px; text-decoration: none; }
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: #0f1a26; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #222; }
+        .nav-item { cursor: pointer; color: #888; font-size: 12px; }
     </style>
 </head>
 <body>
-    <img src="https://i.ibb.co/nMZY2bQJ/watermarked-img-12130583545689383100.png" alt="Profile DP" class="profile-img">
-    <h1>ReyaJ Seller ☠️</h1>
-    <p>VIP Store & Keys</p>
-    <div class="card">
-        <h3>VIP Panel Key</h3>
-        <p>Price: NPR 100</p>
-        <p>eSewa Pay: 9822259366</p>
-        <a href="https://wa.me/9779822259366" class="btn">Buy via WhatsApp</a>
+
+    <div class="header">
+        <img src="https://i.ibb.co/nMZY2bQJ/watermarked-img-12130583545689383100.png" class="avatar">
+        <div>
+            <h3 style="margin:0">ANUJ x PANEL</h3>
+            <small style="color:var(--accent)">SECURE LICENSE VAULT</small>
+        </div>
     </div>
+
+    <!-- Store Tab -->
+    <div id="store" class="content active">
+        <h3>MATTE MARKET</h3>
+        <div class="card">
+            <p>Products: 21 Active</p>
+            <p>Stock: 17897 Keys</p>
+        </div>
+        <a href="https://t.me/yourlink" class="btn">Download APK on Telegram</a>
+    </div>
+
+    <!-- Wallet Tab -->
+    <div id="wallet" class="content">
+        <h3>WALLET</h3>
+        <div class="card">
+            <h2 style="color:var(--accent)">NPR 40</h2>
+            <p>Available in your wallet</p>
+        </div>
+        <div class="card">
+            <p>eSewa: Manual QR payment</p>
+            <a href="https://wa.me/9779822259366" class="btn">Add Funds (eSewa)</a>
+        </div>
+    </div>
+
+    <!-- Keys Tab -->
+    <div id="keys" class="content">
+        <h3>SECURE VAULT</h3>
+        <div class="card">
+            <p>BALA MOD PRO - Active</p>
+        </div>
+    </div>
+
+    <!-- Referral Tab -->
+    <div id="referral" class="content">
+        <h3>INVITE & EARN</h3>
+        <div class="card">
+            <p>Invite URL:</p>
+            <input type="text" value="https://anujxpanel.store/reg" readonly style="width:100%; background:#000; color:#fff; border:none; padding:5px;">
+            <div class="btn">Copy Link</div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <div class="nav-item" onclick="show('store')">STORE</div>
+        <div class="nav-item" onclick="show('wallet')">WALLET</div>
+        <div class="nav-item" onclick="show('keys')">KEYS</div>
+        <div class="nav-item" onclick="show('referral')">REFERRAL</div>
+    </div>
+
+    <script>
+        function show(id) {
+            document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+    </script>
 </body>
 </html>
+
 
