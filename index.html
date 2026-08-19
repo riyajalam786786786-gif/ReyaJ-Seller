@@ -3,85 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anuj x Panel Store</title>
+    <title>ANUJ x PANEL</title>
     <style>
-        :root { --bg: #0b131e; --card: #16202d; --text: #ffffff; --accent: #00d4ff; }
-        body { background-color: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; padding-bottom: 70px; }
-        .header { padding: 20px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #222; }
-        .avatar { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--accent); }
+        :root { --bg: #070d14; --card: #0f1923; --text: #fff; --accent: #00e5ff; --wa: #25d366; }
+        body { background: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; padding-bottom: 80px; }
+        .header { padding: 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1a2936; }
+        .avatar { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--accent); }
         .content { padding: 15px; display: none; }
         .active { display: block; }
-        .card { background: var(--card); padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 1px solid #2a3a4a; }
-        .btn { background: var(--accent); color: #000; padding: 12px; border-radius: 10px; text-align: center; font-weight: bold; cursor: pointer; display: block; margin-top: 10px; text-decoration: none; }
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: #0f1a26; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #222; }
-        .nav-item { cursor: pointer; color: #888; font-size: 12px; }
+        .card { background: var(--card); padding: 15px; border-radius: 12px; margin-bottom: 15px; border: 1px solid #1a2936; }
+        .btn { background: var(--accent); color: #000; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; cursor: pointer; display: block; margin-top: 10px; text-decoration: none; }
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: #081018; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #1a2936; }
+        .nav-item { cursor: pointer; color: #7a8b9e; font-size: 11px; text-align: center; }
+        .nav-item.active { color: var(--accent); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .qr-box { width: 100%; max-width: 200px; margin: 10px auto; display: block; border-radius: 10px; border: 2px solid var(--accent); }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <img src="https://i.ibb.co/nMZY2bQJ/watermarked-img-12130583545689383100.png" class="avatar">
-        <div>
-            <h3 style="margin:0">ANUJ x PANEL</h3>
-            <small style="color:var(--accent)">SECURE LICENSE VAULT</small>
+        <div style="display:flex; align-items:center; gap:10px;">
+            <img src="https://i.ibb.co/nMZY2bQJ/watermarked-img-12130583545689383100.png" class="avatar">
+            <div><h4 style="margin:0">ANUJ x PANEL</h4><small style="color:var(--accent)">SECURE LICENSE VAULT</small></div>
         </div>
+        <div style="background:#11222d; padding:5px 12px; border-radius:20px; font-size:12px; color:var(--accent)">👛 NPR 40</div>
     </div>
 
-    <!-- Store Tab -->
+    <!-- STORE -->
     <div id="store" class="content active">
-        <h3>MATTE MARKET</h3>
-        <div class="card">
-            <p>Products: 21 Active</p>
-            <p>Stock: 17897 Keys</p>
+        <div class="grid">
+            <div class="card"><strong>BALA MOD PRO</strong><br><small>NPR 50</small><div class="btn" onclick="alert('Contact Support')">BUY</div></div>
+            <div class="card"><strong>DRIP CLIENT</strong><br><small>NPR 150</small><div class="btn" onclick="alert('Contact Support')">BUY</div></div>
         </div>
-        <a href="https://t.me/yourlink" class="btn">Download APK on Telegram</a>
     </div>
 
-    <!-- Wallet Tab -->
+    <!-- WALLET -->
     <div id="wallet" class="content">
-        <h3>WALLET</h3>
+        <h3>RECHARGE WALLET</h3>
         <div class="card">
-            <h2 style="color:var(--accent)">NPR 40</h2>
-            <p>Available in your wallet</p>
-        </div>
-        <div class="card">
-            <p>eSewa: Manual QR payment</p>
-            <a href="https://wa.me/9779822259366" class="btn">Add Funds (eSewa)</a>
+            <p>Scan eSewa QR:</p>
+            <!-- eSewa Image -->
+            <img src="https://i.ibb.co/cczy1NFK/eSewa.jpg" alt="eSewa QR" class="qr-box">
+            <a href="https://wa.me/9779822259366?text=Maine%20eSewa%20se%20Payment%20kar%20diya%20hai" class="btn">Send Screenshot to WhatsApp</a>
         </div>
     </div>
 
-    <!-- Keys Tab -->
-    <div id="keys" class="content">
-        <h3>SECURE VAULT</h3>
-        <div class="card">
-            <p>BALA MOD PRO - Active</p>
-        </div>
-    </div>
+    <!-- KEYS -->
+    <div id="keys" class="content"><h3>YOUR KEYS</h3><div class="card">No active keys.</div></div>
 
-    <!-- Referral Tab -->
-    <div id="referral" class="content">
-        <h3>INVITE & EARN</h3>
+    <!-- REFERRAL -->
+    <div id="referral" class="content"><h3>INVITE</h3><div class="card">Copy link: <input type="text" value="anujxpanel.store/ref" readonly style="width:100%; background:transparent; color:#fff; border:none; margin-top:5px;"></div></div>
+
+    <!-- PROFILE -->
+    <div id="profile" class="content">
+        <h3>PROFILE</h3>
         <div class="card">
-            <p>Invite URL:</p>
-            <input type="text" value="https://anujxpanel.store/reg" readonly style="width:100%; background:#000; color:#fff; border:none; padding:5px;">
-            <div class="btn">Copy Link</div>
+            <p>Joined: 11 Aug 2026</p>
+            <!-- WhatsApp Channel Link -->
+            <a href="https://whatsapp.com/channel/0029VbBY5372P59nZf4Eg51Y" class="btn" style="background:var(--wa); color:#fff" target="_blank">Join WhatsApp Channel</a>
         </div>
     </div>
 
     <div class="nav-bar">
-        <div class="nav-item" onclick="show('store')">STORE</div>
-        <div class="nav-item" onclick="show('wallet')">WALLET</div>
-        <div class="nav-item" onclick="show('keys')">KEYS</div>
-        <div class="nav-item" onclick="show('referral')">REFERRAL</div>
+        <div class="nav-item active" onclick="show('store', this)">🏠<br>STORE</div>
+        <div class="nav-item" onclick="show('wallet', this)">👛<br>WALLET</div>
+        <div class="nav-item" onclick="show('keys', this)">🔑<br>KEYS</div>
+        <div class="nav-item" onclick="show('referral', this)">🎁<br>REFERRAL</div>
+        <div class="nav-item" onclick="show('profile', this)">👤<br>PROFILE</div>
     </div>
 
     <script>
-        function show(id) {
+        function show(id, el) {
             document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById(id).style.display = 'block';
+            el.classList.add('active');
         }
     </script>
 </body>
 </html>
-
-
